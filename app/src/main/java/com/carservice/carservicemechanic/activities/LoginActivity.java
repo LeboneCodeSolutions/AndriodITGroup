@@ -37,9 +37,9 @@ public class LoginActivity extends AppCompatActivity {
     private void loginMechanic() {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
-
+// github example
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Email & Password required", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "User Email & Password required", Toast.LENGTH_SHORT).show();
             return;
         }
 
