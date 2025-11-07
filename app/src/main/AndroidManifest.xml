@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.MechanicDashboardActivity" />
+        <activity android:name=".activities.MechanicJobsActivity" />
+        <activity android:name=".activities.MechanicJobDetailsActivity" />
     </application>
 
 </manifest>
