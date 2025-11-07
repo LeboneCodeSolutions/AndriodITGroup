@@ -11,9 +11,11 @@ import com.carservice.carservicemechanic.adapters.MechanicJobAdapter;
 import com.carservice.carservicemechanic.models.ServiceRequest;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MechanicJobsActivity extends AppCompatActivity {
 
@@ -41,8 +43,11 @@ public class MechanicJobsActivity extends AppCompatActivity {
     }
 
     private void loadJobs() {
+        String mechanicId = auth.getCurrentUser().getUid();
+
         db.collection("serviceRequests")
-                .whereEqualTo("status", "pending")
+                .whereIn("status", Arrays.asList("pending", "in-progress"))
+                .orderBy("status", Query.Direction.DESCENDING)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) return;
 
@@ -50,7 +55,10 @@ public class MechanicJobsActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot doc : value) {
                         ServiceRequest s = doc.toObject(ServiceRequest.class);
                         s.setId(doc.getId());
-                        jobsList.add(s);
+
+                        if (s.getStatus().equals("pending") || (s.getStatus().equals("in-progress") && mechanicId.equals(s.getMechanicId()))) {
+                            jobsList.add(s);
+                        }
                     }
                     adapter.notifyDataSetChanged();
                 });

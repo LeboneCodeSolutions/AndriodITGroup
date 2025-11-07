@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.carservice.carservicemechanic.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
@@ -37,15 +38,18 @@ public class LoginActivity extends AppCompatActivity {
     private void loginMechanic() {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
-// github example
+
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "User Email & Password required", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "User email and password are required", Toast.LENGTH_SHORT).show();
             return;
         }
 
         auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
-                    String uid = auth.getCurrentUser().getUid();
+                    FirebaseUser user = auth.getCurrentUser();
+                    if (user == null) return;
+
+                    String uid = user.getUid();
 
                     db.collection("users").document(uid).get()
                             .addOnSuccessListener(doc -> {
@@ -53,13 +57,13 @@ public class LoginActivity extends AppCompatActivity {
                                     startActivity(new Intent(LoginActivity.this, MechanicDashboardActivity.class));
                                     finish();
                                 } else {
-                                    Toast.makeText(this, "Not a mechanic account!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(this, "Sorry you are not a mechanic !!!", Toast.LENGTH_LONG).show();
                                     auth.signOut();
                                 }
                             });
                 })
                 .addOnFailureListener(e ->
-                        Toast.makeText(this, "Login failed: " + e.getMessage(), Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Failed to Login!!: " + e.getMessage(), Toast.LENGTH_LONG).show()
                 );
     }
 }
