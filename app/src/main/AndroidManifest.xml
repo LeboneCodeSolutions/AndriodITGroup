@@ -23,6 +23,10 @@
         <activity android:name=".activities.MechanicDashboardActivity" />
         <activity android:name=".activities.MechanicJobsActivity" />
         <activity android:name=".activities.MechanicJobDetailsActivity" />
+        <activity
+            android:name=".activities.RegistrationActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
