@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MechanicDashboardActivity extends AppCompatActivity {
 
-    Button btnViewJobs, btnLogout;
+    Button btnViewJobs, btnLogout, btnCreateInvoice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +19,15 @@ public class MechanicDashboardActivity extends AppCompatActivity {
 
         btnViewJobs = findViewById(R.id.btnViewJobs);
         btnLogout = findViewById(R.id.btnLogout);
+        btnCreateInvoice = findViewById(R.id.btnCreateInvoice);
 
         btnViewJobs.setOnClickListener(v ->
                 startActivity(new Intent(MechanicDashboardActivity.this, MechanicJobsActivity.class))
         );
 
-        findViewById(R.id.btnCreateInvoice).setOnClickListener(v -> startActivity(new Intent(this, InvoiceCreateActivity.class)));
+        btnCreateInvoice.setOnClickListener(v ->
+                startActivity(new Intent(MechanicDashboardActivity.this, InvoiceCreateActivity.class))
+        );
 
         btnLogout.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
