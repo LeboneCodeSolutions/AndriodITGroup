@@ -16,7 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class LoginActivity extends AppCompatActivity {
 
     EditText etEmail, etPassword;
-    Button btnLogin;
+    Button btnLogin, btnRegister;
     FirebaseAuth auth;
     FirebaseFirestore db;
 
@@ -31,8 +31,11 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        btnRegister = findViewById(R.id.btnRegister);
 
         btnLogin.setOnClickListener(v -> loginMechanic());
+
+        btnRegister.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegistrationActivity.class)));
     }
 
     private void loginMechanic() {

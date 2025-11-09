@@ -27,4 +27,11 @@
         android:layout_height="50dp"
         android:text="Sign In"
         android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Sign Up"
+        android:textAllCaps="false" />
 </LinearLayout>
