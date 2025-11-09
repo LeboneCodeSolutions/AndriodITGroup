@@ -15,7 +15,16 @@ import com.carservice.carservicemechanic.models.ServiceRequest;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MechanicJobAdapter extends RecyclerView.Adapter<MechanicJobAdapter.ViewHolder> {
 
@@ -59,6 +68,16 @@ public class MechanicJobAdapter extends RecyclerView.Adapter<MechanicJobAdapter.
                         .addOnSuccessListener(unused -> {
                             holder.status.setText("Status: in-progress");
                             holder.accept.setVisibility(View.GONE);
+
+                            db.collection("users").document(s.getUserId()).get()
+                                    .addOnSuccessListener(userDoc -> {
+                                        String token = userDoc.getString("fcmToken");
+
+                                        sendNotificationToClient(token,
+                                                "Your vehicle service has started",
+                                                "Mechanic is now working on your car."
+                                        );
+                                    });
                         });
             });
         } else {
@@ -70,6 +89,35 @@ public class MechanicJobAdapter extends RecyclerView.Adapter<MechanicJobAdapter.
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    private void sendNotificationToClient(String token, String title, String message) {
+        OkHttpClient client = new OkHttpClient();
+
+        String json = "{\"to\":\"" + token + "\",\"notification\":{\"title\":\"" + title + "\",\"body\":\"" + message + "\"}}";
+
+        RequestBody body = RequestBody.create(
+                json, MediaType.get("application/json; charset=utf-8")
+        );
+
+        Request request = new Request.Builder()
+                .url("https://fcm.googleapis.com/fcm/send")
+                .post(body)
+                .addHeader("Authorization", "key=YOUR_SERVER_KEY_HERE")
+                .addHeader("Content-Type", "application/json")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                System.out.println(response.body().string());
+            }
+        });
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -24,6 +24,8 @@ public class MechanicDashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(MechanicDashboardActivity.this, MechanicJobsActivity.class))
         );
 
+        findViewById(R.id.btnCreateInvoice).setOnClickListener(v -> startActivity(new Intent(this, InvoiceCreateActivity.class)));
+
         btnLogout.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(MechanicDashboardActivity.this, LoginActivity.class));

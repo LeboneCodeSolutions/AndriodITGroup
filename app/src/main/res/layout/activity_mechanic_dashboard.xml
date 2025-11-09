@@ -13,11 +13,21 @@
         android:text="View Service Jobs"
         android:textAllCaps="false"
         android:layout_marginBottom="18dp"/>
+    <Button
+        android:id="@+id/btnCreateInvoice"
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:text="Create Invoice"
+        android:textAllCaps="false"
+        android:layout_marginTop="12dp"/>
 
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="Logout"
-        android:textAllCaps="false"/>
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#FF0000"
+        android:text="Log-out"
+        android:textAllCaps="true"/>
+
 </LinearLayout>

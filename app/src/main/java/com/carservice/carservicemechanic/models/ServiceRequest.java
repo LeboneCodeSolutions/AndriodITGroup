@@ -9,18 +9,18 @@ public class ServiceRequest implements Serializable {
     private String status;
     private String description;
     private String mechanicId;
+    private String userId;
 
-    public ServiceRequest() {
-        // Default constructor required for calls to DataSnapshot.getValue(ServiceRequest.class)
-    }
 
-    public ServiceRequest(String id, String serviceType, String vehicleId, String status, String description, String mechanicId) {
+
+    public ServiceRequest(String id, String serviceType, String vehicleId, String status, String description, String mechanicId, String userId) {
         this.id = id;
         this.serviceType = serviceType;
         this.vehicleId = vehicleId;
         this.status = status;
         this.description = description;
         this.mechanicId = mechanicId;
+        this.userId = userId;
     }
 
     public String getId() {
@@ -69,5 +69,13 @@ public class ServiceRequest implements Serializable {
 
     public void setMechanicId(String mechanicId) {
         this.mechanicId = mechanicId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
