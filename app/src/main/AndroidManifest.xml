@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MechanicDashboardActivity" />
+        <activity android:name=".activities.MechanicDashboardActivity"
+            android:exported="true"/>
         <activity android:name=".activities.MechanicJobsActivity" />
         <activity android:name=".activities.MechanicJobDetailsActivity" />
         <activity android:name=".activities.InvoiceCreateActivity" />

@@ -1,7 +1,6 @@
 package com.carservice.carservicemechanic.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,14 +8,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageView;
+
 import com.carservice.carservicemechanic.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MechanicDashboardActivity extends AppCompatActivity {
 
-    private Button btnViewJobs, btnLogout, btnCreateInvoice;
+    private Button btnViewJobsBoard, btnViewCurrentJobs, btnLogout, btnCreateInvoice;
     private TextView tvWelcome;
     private ImageView editProfile;
 
@@ -32,29 +31,35 @@ public class MechanicDashboardActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // Initialize UI components
-       // btnViewJobs = findViewById(R.id.btnViewJobs);
+        // ✅ Match all IDs to XML
+        btnViewJobsBoard = findViewById(R.id.btnViewJobsBoard);
+        btnViewCurrentJobs = findViewById(R.id.btnViewCurrentJobs);
         btnLogout = findViewById(R.id.btnLogout);
         btnCreateInvoice = findViewById(R.id.btnCreateInvoice);
-        tvWelcome = findViewById(R.id.tvWelcome); // add this TextView in XML
+        tvWelcome = findViewById(R.id.tvWelcome);
         editProfile = findViewById(R.id.editProfile);
-        // Load mechanic name
-        loadMechanicName();
 
-    editProfile.setOnClickListener(v -> {
-            Intent intent = new Intent(MechanicDashboardActivity.this, editProfileActivity.class);
-            startActivity(intent);
-        });
+        // ✅ Button listeners
+        btnViewJobsBoard.setOnClickListener(v ->
+                Toast.makeText(this, "Job Board clicked", Toast.LENGTH_SHORT).show());
+
+        btnViewCurrentJobs.setOnClickListener(v ->
+                Toast.makeText(this, "Current Jobs clicked", Toast.LENGTH_SHORT).show());
 
         btnCreateInvoice.setOnClickListener(v ->
-                startActivity(new Intent(MechanicDashboardActivity.this, InvoiceCreateActivity.class))
-        );
+                startActivity(new Intent(this, InvoiceCreateActivity.class)));
+
+        editProfile.setOnClickListener(v ->
+                startActivity(new Intent(this, editProfileActivity.class)));
 
         btnLogout.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(MechanicDashboardActivity.this, LoginActivity.class));
+            auth.signOut();
+            startActivity(new Intent(this, LoginActivity.class));
             finish();
         });
+
+        // ✅ Load name after view initialization
+        loadMechanicName();
     }
 
     private void loadMechanicName() {
@@ -74,18 +79,16 @@ public class MechanicDashboardActivity extends AppCompatActivity {
 
                         if (firstName != null && lastName != null) {
                             tvWelcome.setText("Welcome, " + firstName + " " + lastName + "!");
-                            // ✅ Save name for other pages
                             SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("firstName", firstName);
-                            editor.putString("lastName", lastName);
-                            editor.apply();
+                            prefs.edit()
+                                    .putString("firstName", firstName)
+                                    .putString("lastName", lastName)
+                                    .apply();
                         } else {
                             tvWelcome.setText("Welcome, Mechanic!");
                         }
                     } else {
                         tvWelcome.setText("Welcome, Mechanic!");
-                        Toast.makeText(this, "User profile not found.", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(e ->

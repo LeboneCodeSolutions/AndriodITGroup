@@ -2,7 +2,6 @@ package com.carservice.carservicemechanic.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -17,13 +16,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText etEmail, etPassword;
-    Button btnLogin, btnRegister;
+    private EditText etEmail, etPassword;
+    private Button btnLogin;
+    private TextView linkRegister;
 
-    TextView linkRegister;
-    FirebaseAuth auth;
-    FirebaseFirestore db;
-
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,26 +31,21 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        // ✅ Initialize views properly
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-
-
-        Button btnLogin = findViewById(R.id.btnLogin);
-
+        btnLogin = findViewById(R.id.btnLogin);
 
         linkRegister = findViewById(R.id.linkRegister);
 
-            //link to the registration page
+        // ✅ Link to registration activity
         linkRegister.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
         });
 
-
-
+        // ✅ Login button click
         btnLogin.setOnClickListener(v -> loginMechanic());
 
-        btnRegister.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegistrationActivity.class)));
     }
 
     private void loginMechanic() {
@@ -80,7 +73,10 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(this, "Sorry you are not a mechanic !!!", Toast.LENGTH_LONG).show();
                                     auth.signOut();
                                 }
-                            });
+                            })
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(this, "Error fetching user data: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                            );
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this, "Failed to Login!!: " + e.getMessage(), Toast.LENGTH_LONG).show()
