@@ -2,10 +2,12 @@ package com.carservice.carservicemechanic.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.carservice.carservicemechanic.R;
@@ -17,8 +19,11 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText etEmail, etPassword;
     Button btnLogin, btnRegister;
+
+    TextView linkRegister;
     FirebaseAuth auth;
     FirebaseFirestore db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +35,20 @@ public class LoginActivity extends AppCompatActivity {
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-        btnLogin = findViewById(R.id.btnLogin);
-        btnRegister = findViewById(R.id.btnRegister);
+
+
+        Button btnLogin = findViewById(R.id.btnLogin);
+
+
+        linkRegister = findViewById(R.id.linkRegister);
+
+            //link to the registration page
+        linkRegister.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+            startActivity(intent);
+        });
+
+
 
         btnLogin.setOnClickListener(v -> loginMechanic());
 

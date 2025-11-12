@@ -1,37 +1,85 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="top|start"
     android:orientation="vertical"
+    android:fontFamily="sans-serif-medium"
     android:padding="24dp">
+
+    <Button
+        android:id="@+id/Homebutton"
+        android:layout_width="61dp"
+        android:layout_height="37dp"
+        app:iconSize="25dp"
+        app:icon="?attr/actionModeCloseDrawable" />
+
+
+    <TextView
+        android:layout_width="363dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Welcome Back !"
+        android:textColor="#020202"
+        android:textSize="40dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:textColor="#020202"
+        android:textSize="14sp"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Sign in to accces your portal of mechanical challenges and opportunities." />
 
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-medium"
         android:hint="Mechanic Email"
-        android:inputType="textEmailAddress"
-        android:layout_marginBottom="16dp" />
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/etPassword"
+        style="@style/Widget.AppCompat.AutoCompleteTextView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
         android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_marginBottom="16dp" />
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Sign In"
-        android:textAllCaps="false"/>
+        android:fontFamily="sans-serif-black"
+        android:text="Sign in"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:icon="@drawable/common_full_open_on_phone"
+        app:iconPadding="2dp"
+        app:iconSize="25dp"
+        app:iconGravity="textStart"
+        app:iconTint="@android:color/white" />
 
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Sign Up"
-        android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/linkRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Don't have an account? Sign Up"
+        android:textSize="14sp"
+        android:textColor="#020202"
+        android:clickable="true"
+        android:focusable="true" />
+
+
+
 </LinearLayout>
