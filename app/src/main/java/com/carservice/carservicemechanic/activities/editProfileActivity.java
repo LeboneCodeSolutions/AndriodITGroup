@@ -17,7 +17,7 @@ public class editProfileActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private TextView fName;
     private TextView lName;
-    private Button btnBackHome;
+    private Button btnBackHome, btnEditDetails, btnChangePassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,8 @@ public class editProfileActivity extends AppCompatActivity {
         btnBackHome = findViewById(R.id.btnBackHome);
         fName = findViewById(R.id.profileFirstName);
         lName = findViewById(R.id.profileLastName);
+        btnEditDetails = findViewById(R.id.btnEditDetails);
+        btnChangePassword = findViewById(R.id.btnChangePassword);
 
         // ✅ Load mechanic name from SharedPreferences
         SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
@@ -42,6 +44,18 @@ public class editProfileActivity extends AppCompatActivity {
         fName.setText(firstName);
         lName.setText(lastName);
 
+
+// Handle Edit details button
+        btnEditDetails.setOnClickListener(v -> {Intent intent = new Intent(editProfileActivity.this, editDetailsActivity.class );
+            startActivity(intent);
+            finish();
+        });
+
+        //edit password
+        btnChangePassword.setOnClickListener(v -> {Intent intent = new Intent(editProfileActivity.this, changePasswordActivity.class );
+            startActivity(intent);
+            finish();
+        });
         // ✅ Handle "Back Home" button
         btnBackHome.setOnClickListener(v -> {
             Intent intent = new Intent(editProfileActivity.this, MechanicDashboardActivity.class);

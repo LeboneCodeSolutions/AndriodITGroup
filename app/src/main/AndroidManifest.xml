@@ -27,7 +27,10 @@
         <activity android:name=".activities.InvoiceCreateActivity" />
         <activity android:name=".activities.editProfileActivity"
             android:exported="true"/>
+<activity android:name=".activities.editDetailsActivity"
+    android:exported="true"/>
 
+        <activity android:name=".activities.changePasswordActivity" android:exported="true"/>
         <activity
             android:name=".activities.RegistrationActivity"
             android:exported="true">
