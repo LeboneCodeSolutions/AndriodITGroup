@@ -7,7 +7,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.carservice.carservicemechanic.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,8 +41,7 @@ public class editDetailsActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
         String firstName = prefs.getString("firstName", "Mechanic");
         String lastName = prefs.getString("lastName", "");
-        String userEmail = prefs.getString("email",
-                auth.getCurrentUser() != null ? auth.getCurrentUser().getEmail() : "");
+        String userEmail = prefs.getString("email", auth.getCurrentUser() != null ? auth.getCurrentUser().getEmail() : "");
 
         fName.setText(firstName);
         lName.setText(lastName);

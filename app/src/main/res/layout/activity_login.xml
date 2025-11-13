@@ -70,16 +70,25 @@
 
 
     <TextView
-        android:id="@+id/linkRegister"
+        android:id="@+id/linkForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Don't have an account? Sign Up"
-        android:textSize="14sp"
-        android:textColor="#020202"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        android:text="Forgot Password"
+        android:textColor="#020202"
+        android:textSize="12sp" />
 
+    <TextView
+        android:id="@+id/linkRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="Don't have an account? Sign Up"
+        android:textColor="#020202"
+        android:textSize="14sp" />
 
 
 </LinearLayout>

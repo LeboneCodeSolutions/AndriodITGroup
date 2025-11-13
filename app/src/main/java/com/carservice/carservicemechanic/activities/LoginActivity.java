@@ -18,7 +18,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
     private Button btnLogin;
-    private TextView linkRegister;
+    private TextView linkRegister , linkForgotPassword;
+
 
     private FirebaseAuth auth;
     private FirebaseFirestore db;
@@ -37,10 +38,17 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
 
         linkRegister = findViewById(R.id.linkRegister);
+        linkForgotPassword = findViewById(R.id.linkForgotPassword);
+
+
 
         // ✅ Link to registration activity
         linkRegister.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
+        });
+
+        linkForgotPassword.setOnClickListener(v ->{
+            startActivity(new Intent( LoginActivity.this, forgotPasswordActivity.class));
         });
 
         // ✅ Login button click

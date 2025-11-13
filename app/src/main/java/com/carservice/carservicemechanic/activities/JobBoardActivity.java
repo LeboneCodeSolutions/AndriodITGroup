@@ -28,7 +28,7 @@ public class JobBoardActivity extends AppCompatActivity {
         jobs = new ArrayList<>();
         jobs.add(new CarJob("John", "Doe", "john@example.com", "ABC123", "1HGCM82633A004352"));
         jobs.add(new CarJob("Jane", "Smith", "jane@example.com", "XYZ789", "1HGCM82633A004353"));
-        // Add as many cars as you need
+
 
         adapter = new JobAdapter(jobs, new JobAdapter.OnAcceptClickListener() {
             @Override
