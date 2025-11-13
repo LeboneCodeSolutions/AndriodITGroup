@@ -41,7 +41,7 @@ public class MechanicDashboardActivity extends AppCompatActivity {
 
         // ✅ Button listeners
         btnViewJobsBoard.setOnClickListener(v ->
-                Toast.makeText(this, "Job Board clicked", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(this, JobBoardActivity.class)));
 
         btnViewCurrentJobs.setOnClickListener(v ->
                 Toast.makeText(this, "Current Jobs clicked", Toast.LENGTH_SHORT).show());
