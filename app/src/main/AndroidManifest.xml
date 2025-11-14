@@ -24,6 +24,8 @@
             android:exported="true"/>
         <activity android:name=".activities.MechanicJobsActivity" />
         <activity android:name=".activities.MechanicJobDetailsActivity" />
+        <activity android:name=".activities.ActiveJobsActivity" android:exported="true" />
+
         <activity android:name=".activities.changePasswordActivity" android:exported="true"/>
         <activity android:name=".activities.JobBoardActivity" android:exported="true"/>
         <activity android:name=".activities.forgotPasswordActivity" android:exported="true" />

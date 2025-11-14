@@ -44,7 +44,7 @@ public class MechanicDashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(this, JobBoardActivity.class)));
 
         btnViewCurrentJobs.setOnClickListener(v ->
-                Toast.makeText(this, "Current Jobs clicked", Toast.LENGTH_SHORT).show());
+               startActivity(new Intent(this, ActiveJobsActivity.class)));
 
         btnCreateInvoice.setOnClickListener(v ->
                 startActivity(new Intent(this, InvoiceCreateActivity.class)));

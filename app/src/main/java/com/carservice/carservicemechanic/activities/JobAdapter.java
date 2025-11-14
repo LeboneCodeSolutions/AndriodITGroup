@@ -39,10 +39,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     public void onBindViewHolder(@NonNull JobViewHolder holder, int position) {
         CarJob job = jobs.get(position);
         holder.tvClientName.setText(job.getClientName());
-        holder.tvLastName.setText(job.getLastName());
         holder.tvClientEmail.setText(job.getClientEmail());
-        holder.tvVehicleReg.setText(job.getVehicleReg());
-        holder.tvVinNumber.setText(job.getVinNumber());
+
 
         holder.btnAcceptJob.setOnClickListener(v -> {
             if (listener != null) listener.onAccept(job);
